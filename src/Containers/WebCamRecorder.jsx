@@ -1,55 +1,33 @@
 import React from "react";
-import MyTimer from "../Components/MyTimer";
 import "../Styles/styles.css";
 import InstructionsLines from "../Components/InstructionsLines";
-import {
-  RecordWebcam,
-  useRecordWebcam,
-  CAMERA_STATUS,
-} from "react-record-webcam";
-// import Timer from "../Components/Timer";
-// import ProgressBar from "../Components/ProgressBar";
-// import type {
-//   WebcamRenderProps,
-//   RecordWebcamOptions,
-//   RecordWebcamHook,
-// } from "react-record-webcam";
+import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 
 const OPTIONS = {
   filename: "test-filename",
   fileType: "mp4",
-  recordingLength: 30,
+  // recordingLength: 30,
   width: 1920,
   height: 1080,
 };
-// const [show,setShow]=React.useState(false);
-function Timer1() {
-  console.log("hello how are you");
-  let timeleft = 60;
-
-  let downloadTimer = setInterval(function function1() {
-    let hi = `${timeleft} : seconds`;
-
-    console.log("Remaining time:", hi);
-    timeleft -= 1;
-    if (timeleft <= 0) {
-      clearInterval(downloadTimer);
-    }
-  }, 1000);
-}
 
 export const WebCamRecorder = () => {
   const recordWebcam = useRecordWebcam(OPTIONS);
-
-  // const getRecordingFileHooks = async () => {
-  //   const blob = await recordWebcam.getRecording();
-  //   console.log({ blob });
-  // };
-
-  // const getRecordingFileRenderProp = async (blob) => {
-  //   console.log({ blob });
-  // };
-
+  const [timer, setTimer] = React.useState(150);
+  const [intervalId, setIntervalId] = React.useState();
+  const minutes = Math.floor(timer / 60);
+  const seconds = timer % 60;
+  const webCamTimer = () => {
+    const timerId = setInterval(() => {
+      setTimer((timer) => timer - 1);
+    }, 1000);
+    setIntervalId(timerId);
+  };
+  const stopRecording = () => {
+    clearInterval(intervalId);
+    recordWebcam.stop();
+  };
+  timer === 0 && stopRecording();
   return (
     <>
       <p className="logo">Jobeffekt.dk</p>
@@ -85,14 +63,9 @@ export const WebCamRecorder = () => {
                 recordWebcam.status === CAMERA_STATUS.PREVIEW
               }
               onClick={() => {
-                {
-                  recordWebcam.start();
-                }
-                {
-                  Timer1();
-                }
+                recordWebcam.start();
+                webCamTimer();
               }}
-              // <MyTimer expiryTimestamp={90} />;
             >
               Start Recording
             </button>
@@ -131,7 +104,6 @@ export const WebCamRecorder = () => {
               }}
               autoPlay
               muted
-              controls
             />
             <video
               ref={recordWebcam.previewRef}
@@ -142,25 +114,23 @@ export const WebCamRecorder = () => {
                     : "none"
                 }`,
               }}
-              autoPlay
-              muted
-              loop
               controls
             />
           </div>
           <div className="cam-status">
             <div>
-              Camera status :{" "}
-              <span className="cam-status-1">{recordWebcam.status}</span>
+              <h3>
+                Camera status :{" "}
+                <span className="cam-status-1">{recordWebcam.status}</span>
+              </h3>
             </div>
             <div>
-              <MyTimer expiryTimestamp={90} />
+              <h3>
+                Remaining time = <span>{minutes}m</span>:<span>{seconds}s</span>
+              </h3>
             </div>
           </div>
         </div>
-        {/* <div>
-          <p>The time is = {hi}</p>
-        </div> */}
         <div>
           <InstructionsLines />
         </div>

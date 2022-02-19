@@ -120,9 +120,9 @@
 }
 
 video {
-  margin: 0.5rem auto;
+  margin: 0.1rem auto;
   width: 40rem;
-  height: 28rem;
+  height: 30rem;
 }
 
 .webcam-thumbnail {
@@ -161,7 +161,7 @@ video {
 .cam-status {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 1.2rem;
 }
 
