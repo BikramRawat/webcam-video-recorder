@@ -26,8 +26,7 @@
   gap: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 96%;
-  height: 45rem;
-  /* padding: 0.6rem; */
+  height: 49rem;
   margin: 0.2rem auto;
   border-radius: 1rem;
 }
@@ -43,11 +42,11 @@
   border-radius: 0.5rem;
   justify-content: center;
   padding: 0.5rem;
-  /* border: 1px solid rgb(245, 238, 238); */
 }
 
 .outer-container .webcam-container .title {
-  padding: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 1.5rem;
   color: #d34927;
   ;
 }
@@ -64,23 +63,17 @@
 }
 
 .outer-container .webcam-container .btns-section .btns {
-  /* background-color: #d34927; */
   padding: 0.5rem;
   border-radius: 0.2rem;
   color: white;
   border: none;
   font-weight: bold;
-  -webkit-border-radius: 0.2rem;
-  -moz-border-radius: 0.2rem;
-  -ms-border-radius: 0.2rem;
-  -o-border-radius: 0.2rem;
   background: rgb(131, 58, 180);
   background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 100%, rgba(252, 176, 69, 1) 100%);
 }
 
 .outer-container .webcam-container .btns-section .btns:hover {
   color: rgb(255, 255, 255);
-  /* background-color: rgb(102, 95, 95); */
   background: rgb(34, 193, 195);
   background: linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
   transition: 0.3ms;
@@ -94,7 +87,6 @@
   width: 38rem;
   height: 38rem;
   padding: 0.7rem;
-  /* border: 1px solid rgb(245, 238, 238); */
 }
 
 .guidelines h3 {
@@ -114,7 +106,6 @@
 }
 
 .guidelines-sections:hover {
-  /* border: 1px solid rgb(233, 228, 228); */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
@@ -129,18 +120,10 @@ video {
   width: 41rem;
   height: 30rem;
   box-shadow: 0 0 16px 0 rgba(179, 157, 157, 0.2);
-  /* border: 1px solid rgb(243, 233, 233); */
 }
 
-/* video::-webkit-media-controls-panel {
-  display: flex !important;
-  opacity: 1 !important;
-} */
-
-
-.btn-timer {
-  /* background-color: #d34927; */
-  padding: 0.4rem;
+.control-btns {
+  padding: 0.4rem 0.7rem;
   border-radius: 0.2rem;
   color: white;
   border: none;
@@ -149,9 +132,8 @@ video {
   background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 100%, rgba(252, 176, 69, 1) 100%);
 }
 
-.btn-timer:hover {
+.control-btns:hover {
   color: white;
-  /* background-color: rgb(70, 65, 65); */
   transition: 0.3s;
   cursor: pointer;
   background: rgb(34, 193, 195);
@@ -161,10 +143,48 @@ video {
 .cam-status {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
-  padding: 1.2rem;
+  align-items: center;
+  padding: 0.6rem 0;
 }
 
-.cam-status-1 {
-  border-bottom: 2px solid rgb(185, 59, 59) !important;
+#myProgress {
+  width: 41rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0.7rem;
+  background-color: rgb(224, 226, 214);
+  margin-top: 0.3rem;
+}
+
+#myBar {
+  width: 0%;
+  height: 1rem;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 100%, rgba(252, 176, 69, 1) 100%);
+  border-radius: 0.7rem;
+  text-align: right;
+  line-height: 1rem;
+  font-size: 0.7rem;
+  color: white;
+  transition: 3s;
+}
+
+.blinking {
+  animation: blinker 0.5s infinite alternate;
+  height: 15px;
+  width: 15px;
+  background-color: rgb(245, 8, 8);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }

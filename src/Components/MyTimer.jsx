@@ -6,7 +6,11 @@ function MyTimer({ expiryTimestamp }) {
     expiryTimestamp,
     onExpire: () => console.warn("onExpire called"),
   });
-
+  // const timeStamp = () => {
+  //   const time = new Date();
+  //   time.setSeconds(time.getSeconds() + expiryTimestamp);
+  //   restart(time);
+  // };
   return (
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "25px" }}>
@@ -19,7 +23,7 @@ function MyTimer({ expiryTimestamp }) {
         className="btn-timer"
         onClick={() => {
           const time = new Date();
-          time.setSeconds(time.getSeconds() + 180);
+          time.setSeconds(time.getSeconds() + expiryTimestamp);
           restart(time);
         }}
       >

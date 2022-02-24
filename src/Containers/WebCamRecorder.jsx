@@ -13,26 +13,52 @@ const OPTIONS = {
 
 export const WebCamRecorder = () => {
   const recordWebcam = useRecordWebcam(OPTIONS);
-  const [timer, setTimer] = React.useState(150);
+  const [timer, setTimer] = React.useState(100);
   const [intervalId, setIntervalId] = React.useState();
+
   const minutes = Math.floor(timer / 60);
   const seconds = timer % 60;
+
   const webCamTimer = () => {
     const timerId = setInterval(() => {
       setTimer((timer) => timer - 1);
     }, 1000);
     setIntervalId(timerId);
   };
+
   const stopRecording = () => {
     clearInterval(intervalId);
     recordWebcam.stop();
+    setTimer(100);
   };
+
   timer === 0 && stopRecording();
+  const elem = document.getElementById("myBar");
+  if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
+    elem.style.width = (100 - timer) / 1 + "%";
+    elem.innerHTML = Math.floor((100 - timer) / 1) + "%";
+  } else if (
+    recordWebcam.status === CAMERA_STATUS.PREVIEW ||
+    recordWebcam.status === CAMERA_STATUS.RECORDING
+  ) {
+    elem.style.width = 0 + "%";
+    elem.innerHTML = 0 + "%";
+  }
+
   return (
     <>
       <p className="logo">Jobeffekt.dk</p>
       <div className="outer-container">
         <div className="webcam-container">
+          <div>
+            <button
+              type="button"
+              className="control-btns"
+              onClick={() => console.log("Go Back to previous page")}
+            >
+              Go Back
+            </button>
+          </div>
           <h3 className="title">Video Ansøgning: Jobeffekt.dk</h3>
           <div className="btns-section">
             <button
@@ -49,16 +75,6 @@ export const WebCamRecorder = () => {
             <button
               className="btns"
               disabled={
-                recordWebcam.status === CAMERA_STATUS.CLOSED ||
-                recordWebcam.status === CAMERA_STATUS.PREVIEW
-              }
-              onClick={recordWebcam.close}
-            >
-              Close Camera
-            </button>
-            <button
-              className="btns"
-              disabled={
                 recordWebcam.status === CAMERA_STATUS.RECORDING ||
                 recordWebcam.status === CAMERA_STATUS.PREVIEW
               }
@@ -71,8 +87,10 @@ export const WebCamRecorder = () => {
             </button>
             <button
               className="btns"
-              disabled={recordWebcam.status !== CAMERA_STATUS.RECORDING}
-              onClick={recordWebcam.stop}
+              onClick={() => {
+                recordWebcam.stop();
+                stopRecording();
+              }}
             >
               Stop Recording
             </button>
@@ -117,18 +135,35 @@ export const WebCamRecorder = () => {
               controls
             />
           </div>
+          <div id="myProgress">
+            <div id="myBar"></div>
+          </div>
           <div className="cam-status">
             <div>
-              <h3>
-                Camera status :{" "}
-                <span className="cam-status-1">{recordWebcam.status}</span>
-              </h3>
+              {recordWebcam.status === CAMERA_STATUS.RECORDING && (
+                <div className="blinking"> </div>
+              )}
+            </div>
+            <div>
+              {recordWebcam.status !== CAMERA_STATUS.RECORDING && (
+                <h4>Camera Status: {recordWebcam.status}</h4>
+              )}
             </div>
             <div>
               <h3>
                 Remaining time = <span>{minutes}m</span>:<span>{seconds}s</span>
               </h3>
             </div>
+            <button
+              type="submit"
+              value="Submit"
+              className="control-btns"
+              onClick={() => {
+                console.log("Your video application is submitted successfully");
+              }}
+            >
+              SUBMIT
+            </button>
           </div>
         </div>
         <div>
