@@ -2,7 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", Helvetica, sans-serif;
+}
+
+body {
+  font-family: "Poppins", Helvetica, sans-serif;
 }
 
 .logo {
@@ -24,16 +28,17 @@
   align-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   width: 96%;
   height: 49rem;
   margin: 0.2rem auto;
   border-radius: 1rem;
+  margin-top: -20px;
 }
 
-.outer-container:hover {
+/* .outer-container:hover {
   box-shadow: 0 0 16px 0 rgba(230, 5, 5, 0.2);
-}
+} */
 
 .outer-container .webcam-container {
   transition: 0.3s;
@@ -112,14 +117,16 @@
 
 video {
   margin: 0.1rem auto;
-  width: 40rem;
+  width: 43rem;
   height: 30rem;
+  margin-top: -10px;
 }
 
 .webcam-thumbnail {
-  width: 41rem;
+  width: auto;
   height: 30rem;
   box-shadow: 0 0 16px 0 rgba(179, 157, 157, 0.2);
+  border-radius: 0.6rem;
 }
 
 .control-btns {
@@ -144,36 +151,42 @@ video {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  gap: 3rem;
   padding: 0.6rem 0;
 }
 
 #myProgress {
-  width: 41rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 0.7rem;
+  width: auto;
+  height: 1.4rem;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  border-radius: 0.3rem;
   background-color: rgb(224, 226, 214);
-  margin-top: 0.3rem;
+  margin-top: 0.6rem;
 }
 
 #myBar {
-  width: 0%;
-  height: 1rem;
+  width: 0;
   background: rgb(131, 58, 180);
   background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 100%, rgba(252, 176, 69, 1) 100%);
-  border-radius: 0.7rem;
+  border-radius: 0.3rem;
   text-align: right;
-  line-height: 1rem;
+  padding-right: 3px;
+  line-height: 1.4rem;
   font-size: 0.7rem;
   color: white;
   transition: 3s;
+  height: 1.4rem;
 }
 
 .blinking {
+  position: absolute;
+  z-index: 1;
+  margin: 24.4rem 2rem;
   animation: blinker 0.5s infinite alternate;
-  height: 15px;
-  width: 15px;
+  height: 1.2rem;
+  width: 1.2rem;
   background-color: rgb(245, 8, 8);
   border-radius: 50%;
   display: inline-block;
