@@ -47,7 +47,7 @@ export const WebCamRecorder = () => {
 
   return (
     <>
-      <p className="logo">Jobeffekt.dk</p>
+      {/* <p className="logo">Jobeffekt.dk</p> */}
       <div className="outer-container">
         <div className="webcam-container">
           <div>
@@ -110,6 +110,11 @@ export const WebCamRecorder = () => {
             </button>
           </div>
           <div className="webcam-thumbnail">
+            <div>
+              {recordWebcam.status === CAMERA_STATUS.RECORDING && (
+                <div className="blinking"> </div>
+              )}
+            </div>
             <video
               ref={recordWebcam.webcamRef}
               style={{
@@ -139,15 +144,13 @@ export const WebCamRecorder = () => {
             <div id="myBar"></div>
           </div>
           <div className="cam-status">
-            <div>
+            {/* <div>
               {recordWebcam.status === CAMERA_STATUS.RECORDING && (
                 <div className="blinking"> </div>
               )}
-            </div>
+            </div> */}
             <div>
-              {recordWebcam.status !== CAMERA_STATUS.RECORDING && (
-                <h4>Camera Status: {recordWebcam.status}</h4>
-              )}
+              <h4>Status: {recordWebcam.status}</h4>
             </div>
             <div>
               <h3>
